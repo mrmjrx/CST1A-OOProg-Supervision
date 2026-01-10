@@ -1,6 +1,37 @@
-package uk.ac.cam.mr2083.sect2;
+package uk.ac.cam.mr2083.sect5.oopdatastructures;
 
-public class OOPLinkedList {
+public class OOPLinkedList implements OOPList {
+    protected static class OOPLinkedListElement {
+        private int value;
+        private OOPLinkedListElement next = null;
+
+        public OOPLinkedListElement(int value) {
+            this.value = value;
+        }
+
+        public OOPLinkedListElement(int value, OOPLinkedListElement next) {
+            this.value = value;
+            this.next = next;
+        }
+
+        public boolean hasNext() {
+            return next != null;
+        }
+
+        public OOPLinkedListElement getNext() {
+            return next;
+        }
+
+        public int getValue() {
+            return value;
+        }
+
+        public void setNext(OOPLinkedListElement next) {
+            this.next = next;
+        }
+    }
+
+
     private OOPLinkedListElement head = null;
 
     public OOPLinkedList() {} // create empty list
@@ -9,12 +40,12 @@ public class OOPLinkedList {
         this.head = null;
 
         for (int elem : ints) {
-            this.insert(elem);
+            this.append(elem);
         }
     }
 
 
-    public OOPLinkedListElement getTail() {
+    protected OOPLinkedListElement getTail() {
         if (head == null) return null;
 
         // tail has no next value, so find elem. with this
@@ -26,11 +57,11 @@ public class OOPLinkedList {
         return currElem;
     }
 
-    public void push(int elem) { // insert at front
+    public void insert(int elem) { // insert at front
         this.head = new OOPLinkedListElement(elem, head);
     }
 
-    public void insert(int elem) { // append to end of list
+    public void append(int elem) { // append to end of list
         if (head == null) {
             head = new OOPLinkedListElement(elem);
             return;
@@ -41,18 +72,13 @@ public class OOPLinkedList {
         tail.setNext(new OOPLinkedListElement(elem));
     }
 
-    public int pop() {
+    public int popFront() {
         if (head == null) throw new ArrayIndexOutOfBoundsException(0);
 
         int currHeadValue = head.getValue();
         head = head.getNext();
 
         return currHeadValue;
-    }
-
-    public int peek() {
-        if (head == null) throw new ArrayIndexOutOfBoundsException(0);
-        return head.getValue();
     }
 
     public boolean isEmpty() {
@@ -72,17 +98,17 @@ public class OOPLinkedList {
         return length;
     }
 
-    public int get(int n) {
-        if (n < 0) throw new ArrayIndexOutOfBoundsException(n);
+    public int get(int idx) throws ArrayIndexOutOfBoundsException {
+        if (idx < 0) throw new ArrayIndexOutOfBoundsException(idx);
 
         OOPLinkedListElement curr = head;
 
-        // fetch a new elem. n times
-        for (int i = 0; i < n; i++) {
+        // fetch a new elem. idx times
+        for (int i = 0; i < idx; i++) {
             curr = curr.getNext();
 
             if (curr == null) {
-                throw new ArrayIndexOutOfBoundsException(n);
+                throw new ArrayIndexOutOfBoundsException(idx);
             }
         }
 

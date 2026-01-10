@@ -25,11 +25,7 @@ public class OOPLinkedListElement {
         return value;
     }
 
-    public void setNext(int next) {
-        if (this.next != null) {
-            throw new RuntimeException("OOPLinkedListElement already has a next element.");
-        }
-
-        this.next = new OOPLinkedListElement(next);
+    public void setNext(OOPLinkedListElement next) {
+        this.next = next;
     }
 }
