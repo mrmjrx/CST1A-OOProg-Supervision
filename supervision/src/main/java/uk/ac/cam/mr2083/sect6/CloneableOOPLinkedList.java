@@ -126,7 +126,7 @@ public class CloneableOOPLinkedList implements OOPList, Cloneable {
     }
 
     @Override
-    protected Object clone() throws CloneNotSupportedException {
+    public CloneableOOPLinkedList clone() {
         CloneableOOPLinkedList newList = new CloneableOOPLinkedList();
 
         OOPLinkedListElement curr = head;
