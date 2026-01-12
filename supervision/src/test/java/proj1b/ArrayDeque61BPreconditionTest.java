@@ -1,6 +1,6 @@
 package proj1b;
 
-import deque.ArrayDeque61B;
+import uk.ac.cam.mr2083.proj.proj1b.ArrayDeque61B;
 
 import jh61b.utils.Reflection;
 import org.junit.jupiter.api.DisplayName;
