@@ -1,7 +1,9 @@
 package uk.ac.cam.mr2083.proj.proj1a;
 
+import org.jetbrains.annotations.NotNull;
 import uk.ac.cam.mr2083.proj.Deque61B;
 
+import java.util.Iterator;
 import java.util.List;
 
 public class LinkedListDeque61B<T> implements Deque61B<T> {
@@ -47,6 +49,11 @@ public class LinkedListDeque61B<T> implements Deque61B<T> {
 
     @Override
     public T getRecursive(int index) {
+        return null;
+    }
+
+    @Override
+    public @NotNull Iterator<T> iterator() {
         return null;
     }
 }
