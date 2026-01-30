@@ -130,7 +130,34 @@ public class LinkedListDeque61B<T> implements Deque61B<T> {
     }
 
     @Override
-    public @NotNull Iterator<T> iterator() {
-        return null;
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (!(obj instanceof LinkedListDeque61B<?> arrDeq)) return false;
+
+        if (this.length != arrDeq.length) return false;
+
+        for (int i = 0; i < length; i++) {
+            if (!this.get(i).equals(arrDeq.get(i))) return false;
+        }
+
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder stringRepr = new StringBuilder();
+        stringRepr.append("[");
+
+        Node currNode = sentinel.next;
+        while (currNode != sentinel) {
+            stringRepr.append(currNode.value.toString());
+
+            if (currNode.next != sentinel) stringRepr.append(", ");
+
+            currNode = currNode.next;
+        }
+
+        stringRepr.append("]");
+        return stringRepr.toString();
     }
 }

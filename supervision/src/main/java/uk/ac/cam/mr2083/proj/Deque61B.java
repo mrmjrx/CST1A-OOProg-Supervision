@@ -1,5 +1,8 @@
 package uk.ac.cam.mr2083.proj;
 
+import org.jetbrains.annotations.NotNull;
+
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -77,4 +80,22 @@ public interface Deque61B<T> extends Iterable<T> {
      * @return element at {@code index} in the deque
      */
     T getRecursive(int index);
+
+    @Override
+    @NotNull
+    default Iterator<T> iterator() {
+        return new Iterator<>() {
+            private int index = 0;
+
+            @Override
+            public boolean hasNext() {
+                return index < Deque61B.this.size();
+            }
+
+            @Override
+            public T next() {
+                return Deque61B.this.get(index++);
+            }
+        };
+    }
 }

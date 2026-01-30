@@ -238,4 +238,43 @@ public class LinkedListDeque61BTest {
 
         assertThat(lld1.toList()).containsExactly(2, 1, 3, 2).inOrder();
     }
+
+    @Test
+    public void stringAndIteratorTest() {
+        Deque61B<Integer> lld1 = new LinkedListDeque61B<>();
+        assertThat(lld1.toString()).isEqualTo("[]");
+        assertThat(lld1.toList()).isEmpty();
+
+        lld1.addLast(1);
+        lld1.addFirst(2);
+        lld1.addLast(3);
+
+        assertThat(lld1.toList()).containsExactly(2, 1, 3).inOrder();
+
+        // assertThat uses iterator, so if test works, then iterator must work
+        assertThat(lld1).containsExactly(2, 1, 3).inOrder();
+        assertThat(lld1.toString()).isEqualTo("[2, 1, 3]");
+    }
+
+    @Test
+    public void equalsTest() {
+        Deque61B<Integer> lld1 = new LinkedListDeque61B<>();
+        assertThat(lld1.equals(3)).isFalse();
+
+        Deque61B<Integer> lld2 = new LinkedListDeque61B<>();
+        assertThat(lld1.equals(lld2)).isTrue();
+
+        lld1.addLast(1);
+        assertThat(lld1.equals(lld2)).isFalse();
+
+        lld2.addFirst(1);
+        assertThat(lld1.equals(lld2)).isTrue();
+        assertThat(lld2.equals(lld1)).isTrue();
+
+        lld1.addLast(1);
+        assertThat(lld1.equals(lld2)).isFalse();
+
+        lld2.addLast(1);
+        assertThat(lld1.equals(lld2)).isTrue();
+    }
 }
