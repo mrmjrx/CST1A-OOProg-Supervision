@@ -1,7 +1,6 @@
 package uk.ac.cam.mr2083.proj.proj1b;
 
 import java.util.Comparator;
-import java.util.Iterator;
 
 public class Maximizer61B {
     /**

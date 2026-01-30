@@ -84,7 +84,7 @@ public interface Deque61B<T> extends Iterable<T> {
     @Override
     @NotNull
     default Iterator<T> iterator() {
-        return new Iterator<T>() {
+        return new Iterator<>() {
             private int index = 0;
 
             @Override
