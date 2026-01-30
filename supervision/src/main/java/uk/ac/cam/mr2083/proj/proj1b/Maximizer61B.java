@@ -1,6 +1,7 @@
 package uk.ac.cam.mr2083.proj.proj1b;
 
 import java.util.Comparator;
+import java.util.Iterator;
 
 public class Maximizer61B {
     /**
@@ -11,7 +12,13 @@ public class Maximizer61B {
      * @return          the maximum element
      */
     public static <T extends Comparable<T>> T max(Iterable<T> iterable) {
-        return null;
+        T currMax = null;
+
+        for (T elem : iterable) {
+            if (currMax == null || elem.compareTo(currMax) > 0) currMax = elem;
+        }
+
+        return currMax;
     }
 
     /**
@@ -23,17 +30,12 @@ public class Maximizer61B {
      * @return          the maximum element according to the comparator
      */
     public static <T> T max(Iterable<T> iterable, Comparator<T> comp) {
-        return null;
-    }
+        T currMax = null;
 
-    public static void main(String[] args) {
-        // The style checker will complain about this main method, feel free to delete.
+        for (T elem : iterable) {
+            if (currMax == null || comp.compare(elem, currMax) > 0) currMax = elem;
+        }
 
-        // ArrayDeque61B<Integer> ad = new ArrayDeque61B<>();
-        // ad.addLast(5);
-        // ad.addLast(12);
-        // ad.addLast(17);
-        // ad.addLast(23);
-        // System.out.println(max(ad));
+        return currMax;
     }
 }
