@@ -46,7 +46,7 @@ public class ArrayDeque61B<T> implements Deque61B<T> {
         this.resizeIfRequired();
 
         this.buffer[this.tail] = x;
-        this.tail = (tail + 1) % capacity;
+        this.tail = (this.tail + 1) % this.capacity;
         this.length++;
     }
 
@@ -54,12 +54,12 @@ public class ArrayDeque61B<T> implements Deque61B<T> {
         if (this.length == this.capacity)
             this.resize((int) (capacity * GROWTH_FACTOR));
 
-        if (this.capacity > MINIMUM_CAPACITY && this.length < capacity * MINIMUM_UTILISATION)
-            this.resize(Math.max((int) (capacity * MINIMUM_UTILISATION), MINIMUM_CAPACITY));
+        if (this.capacity > MINIMUM_CAPACITY && this.length < this.capacity * MINIMUM_UTILISATION)
+            this.resize(Math.max((int) (this.capacity * MINIMUM_UTILISATION), MINIMUM_CAPACITY));
     }
 
     private void resize(int newCapacity) {
-        assert length <= newCapacity;
+        assert this.length <= newCapacity;
 
         T[] newBuffer = (T[]) new Object[newCapacity];
 
@@ -97,28 +97,28 @@ public class ArrayDeque61B<T> implements Deque61B<T> {
 
     @Override
     public boolean isEmpty() {
-        return length == 0;
+        return this.length == 0;
     }
 
     @Override
     public int size() {
-        return length;
+        return this.length;
     }
 
     @Override
     public T removeFirst() {
-        if (length == 0) return null;
+        if (this.length == 0) return null;
 
-        T elem = buffer[head];
+        T elem = this.buffer[this.head];
 
-        buffer[head] = null;
-        head = (head + 1) % capacity;
+        this.buffer[this.head] = null;
+        this.head = Math.floorMod(this.head + 1, capacity);
 
-        length--;
+        this.length--;
 
-        if (length == 0) {
-            head = 0;
-            tail = 0;
+        if (this.length == 0) {
+            this.head = 0;
+            this.tail = 0;
         }
 
         this.resizeIfRequired();
@@ -128,17 +128,17 @@ public class ArrayDeque61B<T> implements Deque61B<T> {
 
     @Override
     public T removeLast() {
-        if (length == 0) return null;
+        if (this.length == 0) return null;
 
         this.tail = Math.floorMod(this.tail - 1, this.capacity);
-        T elem = buffer[tail];
+        T elem = this.buffer[this.tail];
 
-        buffer[tail] = null;
-        length--;
+        this.buffer[this.tail] = null;
+        this.length--;
 
-        if (length == 0) {
-            head = 0;
-            tail = 0;
+        if (this.length == 0) {
+            this.head = 0;
+            this.tail = 0;
         }
 
         this.resizeIfRequired();
@@ -148,11 +148,11 @@ public class ArrayDeque61B<T> implements Deque61B<T> {
 
     @Override
     public T get(int index) {
-        if (index < 0 || index >= length) {
+        if (index < 0 || index >= this.length) {
             return null;
         }
 
-        return buffer[(head + index) % capacity];
+        return this.buffer[(this.head + index) % this.capacity];
     }
 
     @Override
